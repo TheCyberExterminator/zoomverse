@@ -199,7 +199,7 @@ function checkHazards() {
   }
 }
 
-// guard rails — keep the car within the ring road's width (with a soft bump)
+// guard rails — HARD-keep the car on the ring road and steer it back along the track
 function applyGuardRails(dt) {
   railCd -= dt;
   const lane = world.lane || 5;
@@ -208,12 +208,19 @@ function applyGuardRails(dt) {
   if (r < 0.001) return;
   const inner = world.R - lane, outer = world.R + lane;
   if (r < inner || r > outer) {
-    const cr = r < inner ? inner : outer;
-    p.x = (p.x / r) * cr; p.z = (p.z / r) * cr;     // push back onto the road
-    if (car.speed > 10) {
-      car.speed *= 0.55;                             // bump = lose some speed
-      if (railCd <= 0) { Audio.repair(); particles.burst(p, 0x27C4F2, 5, { life: 0.4, spread: 1.2, up: 1 }); railCd = 0.2; }
-    }
+    // 1) pull the car firmly back just inside the rail (can never be off the road)
+    const target = r < inner ? inner + 0.4 : outer - 0.4;
+    p.x = (p.x / r) * target; p.z = (p.z / r) * target;
+    // 2) steer it back along the track direction so it follows the curve, not the wall
+    const theta = Math.atan2(p.z, p.x);
+    const tangent = Math.PI - theta;                 // clockwise racing direction
+    let dh = tangent - car.heading;
+    while (dh > Math.PI) dh -= 2 * Math.PI;
+    while (dh < -Math.PI) dh += 2 * Math.PI;
+    car.heading += dh * 0.3;                          // nudge toward the track
+    // 3) gentle bump feedback
+    car.speed *= 0.7;
+    if (railCd <= 0) { Audio.repair(); particles.burst(p, 0x27C4F2, 5, { life: 0.4, spread: 1.2, up: 1 }); railCd = 0.18; }
   }
 }
 
