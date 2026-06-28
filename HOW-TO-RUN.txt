@@ -1,0 +1,119 @@
+NOAH & DAD: ZOOMVERSE — Prototype 01 (Toy City Speedway test drive)
+====================================================================
+
+WHAT THIS IS
+A real 3D Three.js scene: the blue #07 car driving on the Toy City
+Speedway with a smooth chase camera, glowing cyan wheels, 3 boost pads,
+20 collectible stars, a 2-lap counter and a HUD. This is Step 1 of the
+build roadmap in the Game Design Document.
+
+HOW TO RUN (you need a tiny local web server — browsers block ES modules
+loaded directly from a file:// path)
+
+Option A — Python (already on most computers):
+    1. Open a terminal in this folder (zoomverse-starter).
+    2. Run:   python3 -m http.server 8000
+    3. Open:  http://localhost:8000
+
+Option B — Node:
+    1. Open a terminal in this folder.
+    2. Run:   npx serve .
+    3. Open the localhost URL it prints.
+
+Then open the GALAXY HUB (the front door — it links everything):
+    http://localhost:8000/            → Galaxy Hub (index.html — START HERE)
+
+Or jump straight to a screen:
+    /toycity.html   → Race: Toy City Speedway (Planet 1)
+    /galaxy.html    → Race: Galaxy Loop Road (Planet 2)
+    /ocean.html     → Race: Ocean Tunnel Dash (Planet 3)
+    /factory.html   → Race: Robot Factory Run (Planet 4)
+    /rainbow.html   → Race: Rainbow Stunt Planet (Planet 5)
+    /castle.html    → Race: Star Castle Finale (Planet 6)
+    /build.html     → Build Mode (Broken Bridge)
+    /command.html   → Command Mode (Dad & Son HQ)
+    /garage.html    → Garage (spend stars on upgrades)
+    /settings.html  → Settings (music, SFX, camera distance)
+
+The Hub (index.html) is the home page, so deploying the folder anywhere
+opens straight into the game.
+
+DEPLOY: see DEPLOY-GITHUB.md to host it on GitHub Pages.
+ANDROID APK: see packaging/BUILD-APK.md to wrap it as an Android app
+(npm + Capacitor → Android Studio → APK).
+
+GARAGE (garage.html): spend your saved stars to upgrade Engine, Wheels,
+Boost, Shield, Jump and Magnet (5 levels each; costs 10/20/35/55/80).
+Upgrades are saved in the browser AND they change how the car drives:
+- Engine  → higher top speed & acceleration
+- Wheels  → sharper steering
+- Boost   → stronger boost + faster recharge
+- Magnet  → wider star-pickup radius
+So: race to earn stars, spend them in the Garage, then feel the car
+improve on your next race.
+
+RACE EXTRAS: each race now starts with a 3-2-1-GO countdown, shows a
+live lap timer (top-left), and saves your BEST TIME — beat it for a
+"New best!" on the results screen.
+
+PLANET 2 — GALAXY LOOP ROAD (galaxy.html): a floating neon loop in space
+with 5 gold star rings to fly through plus extra stars (15 total) and
+3 boost lanes. It uses the same car, HUD, upgrades and save. It is
+LOCKED on the Hub until you finish Toy City Speedway once.
+
+JUMPS: both race tracks have a gold LAUNCH RAMP. Drive over it to jump —
+the Jump garage upgrade makes you fly higher.
+
+RIVALS: two StarBot racers now pace around the loop. The HUD shows your
+LIVE POSITION (P1/P3) during the race, and the results screen confirms it.
+
+STUNTS: jumping earns STUNT POINTS from air time and spins (steer in the
+air). Your stunt total shows in the HUD and on the results screen.
+
+PLANET 3 — OCEAN TUNNEL DASH (ocean.html): a glass-tunnel loop with 20
+stars and drifting SLOW BUBBLES that cap your speed if you hit them.
+Locked on the Hub until you finish Galaxy Loop Road.
+
+EFFECTS: boost leaves a cyan trail, collecting a star makes a gold
+sparkle, and hitting a ramp kicks up a burst — all synthesized in-engine.
+
+SOUND: all music and sound effects are generated in-code (Web Audio) —
+no audio files. Sound starts after you click PLAY / START (browsers
+require a click before audio can play).
+
+THE HUB ties it together: your STARS are saved in the browser and shared
+across all three modes. Finish a mode to earn its stars (Race = up to 20,
+Build = 15, Command = 20) and the Hub shows a ✓ DONE badge and your running
+star total. Each mode also has a ⌂ Hub link to come back. "Reset progress"
+on the Hub clears your saved stars.
+
+RACE: click PLAY and drive.
+
+COMMAND MODE (command.html): click START MISSION. Click a Builder Bot
+to select it (gold ring), then click a broken station to send it there.
+Repairs spend Star Energy (top-left bar), which refills over time from
+the Star Generator. Repair all 3 stations to win. Watch out — a cheeky
+StarBot occasionally undoes a little progress, so re-task your bots.
+
+BUILD MODE (build.html): click START BUILDING, then click the glowing
+cells in the gap to place road tiles (5 tiles span it). Use Delete or
+right-click to remove a tile. When the gap is filled, press TEST DRIVE
+and drive across to win. If you miss a tile the car drops into the
+canyon and respawns — fill the gap and try again.
+
+CONTROLS
+    Accelerate ....... W / Up Arrow
+    Brake / reverse .. S / Down Arrow
+    Steer ............ A / D  or  Left / Right Arrows
+    Boost ............ Space  (also drive over a cyan boost pad)
+    Reset car ........ R
+    Pause ............ Esc
+    Touch screens .... on-screen buttons appear automatically
+
+NOTES
+- Three.js loads from a CDN (see the importmap in index.html), so you
+  need an internet connection the first time. To go fully offline,
+  download three.module.js and point the importmap at a local copy.
+- Drop the delivered concept art into an assets/ folder later.
+- This is intentionally a prototype: next steps are the Build and
+  Command mode prototypes (see GDD sections 21 and 22).

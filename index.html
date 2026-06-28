@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Noah &amp; Dad: ZOOMVERSE — Galaxy Hub</title>
+<style>
+  :root{--blue:#22338C;--cyan:#27C4F2;--gold:#F2B43A;--ink:#0B1030;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100%}
+  body{font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;color:#fff;
+    background:radial-gradient(1100px 700px at 75% 10%,#3b2c7a 0%,#1a1f63 45%,#0a0d33 100%);
+    min-height:100vh;overflow-x:hidden}
+  .stars-bg{position:fixed;inset:0;pointer-events:none;background-image:
+    radial-gradient(2px 2px at 20% 30%,#fff,transparent),
+    radial-gradient(1.5px 1.5px at 80% 20%,#cfe6ff,transparent),
+    radial-gradient(1px 1px at 50% 60%,#fff,transparent),
+    radial-gradient(1.5px 1.5px at 35% 80%,#ffe9a8,transparent),
+    radial-gradient(2px 2px at 90% 70%,#cfe6ff,transparent);opacity:.8}
+  header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;
+    gap:1rem;padding:clamp(1rem,3vw,2.2rem);flex-wrap:wrap}
+  .brand .kicker{letter-spacing:.3em;color:var(--gold);font-size:.75rem;text-shadow:0 0 12px rgba(242,180,58,.6)}
+  .brand h1{line-height:.9;font-weight:900;text-transform:uppercase;font-size:clamp(1.8rem,4vw,2.6rem);text-shadow:0 3px 0 #0a1247}
+  .brand h1 span{display:block;font-size:clamp(2.6rem,6vw,4rem);
+    background:linear-gradient(180deg,#8fe3ff,#27C4F2 45%,#2E5BE0);-webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 3px 0 #0a1247)}
+  .wallet{display:flex;align-items:center;gap:1rem}
+  .starbox{background:linear-gradient(180deg,rgba(242,180,58,.25),rgba(16,26,77,.5));
+    border:2px solid rgba(242,180,58,.6);border-radius:16px;padding:.6rem 1.1rem;text-align:center}
+  .starbox .n{font-size:1.8rem;font-weight:900;color:var(--gold);line-height:1}
+  .starbox .l{font-size:.7rem;letter-spacing:.1em;opacity:.85}
+  .crew{height:96px;border-radius:14px;border:2px solid rgba(39,196,242,.5);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+  .setlink{text-decoration:none;color:#cfe0ff;border:2px solid rgba(39,196,242,.5);border-radius:12px;
+    padding:.55rem .8rem;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .setlink:hover{border-color:#27C4F2;color:#fff}
+  .best{margin-top:.5rem;font-weight:800;font-size:.82rem;color:#F2B43A}
+  main{position:relative;z-index:2;padding:0 clamp(1rem,3vw,2.2rem) 2rem}
+  .tagline{color:#dfe6ff;opacity:.9;margin:.2rem 0 1.4rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.1rem}
+  .card{position:relative;display:block;border-radius:22px;overflow:hidden;text-decoration:none;color:#fff;
+    background:#10184a;box-shadow:0 0 0 2px rgba(39,196,242,.35),0 14px 36px rgba(0,0,0,.45);
+    transition:transform .1s,box-shadow .1s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 0 0 2px var(--cyan),0 20px 44px rgba(39,196,242,.35)}
+  .card .thumb{height:170px;background-size:cover;background-position:center}
+  .card .body{padding:1rem 1.1rem 1.2rem}
+  .card .mode{font-size:.72rem;letter-spacing:.18em;color:var(--cyan);font-weight:800}
+  .card h2{font-size:1.5rem;font-weight:900;margin:.1rem 0 .2rem}
+  .card p{font-size:.85rem;color:#cfe0ff;opacity:.9}
+  .badge{position:absolute;top:12px;right:12px;background:rgba(11,16,48,.85);border:2px solid var(--gold);
+    border-radius:999px;padding:.25rem .7rem;font-size:.75rem;font-weight:800;color:var(--gold)}
+  .badge.done{background:#2f7d4f;border-color:#39d353;color:#fff}
+  footer{position:relative;z-index:2;text-align:center;padding:1.4rem;color:#9fb0e6;font-size:.8rem}
+  .reset{background:none;border:1px solid rgba(255,255,255,.3);color:#cfe0ff;border-radius:10px;
+    padding:.4rem .8rem;font-family:inherit;cursor:pointer;font-size:.8rem}
+  .reset:hover{border-color:var(--cyan)}
+</style>
+</head>
+<body>
+  <div class="stars-bg"></div>
+
+  <header>
+    <div class="brand">
+      <div class="kicker">★ TURBO GALAXY ADVENTURE ★</div>
+      <h1>Noah &amp; Dad<span>Zoomverse</span></h1>
+    </div>
+    <div class="wallet">
+      <div class="starbox"><div class="n" id="starTotal">0</div><div class="l">★ STARS</div></div>
+      <a class="setlink" href="settings.html">⚙ Settings</a>
+      <img class="crew" src="assets/zoomverse-noah-and-dad.jpg" alt="Noah and Dad" />
+    </div>
+  </header>
+
+  <main>
+    <p class="tagline">Welcome to the Galaxy Hub. Pick a mission — stars you earn are saved and shared across every mode.</p>
+    <div class="grid">
+      <a class="card" id="card-race" href="toycity.html">
+        <span class="badge" id="badge-race">PLAY</span>
+        <div class="thumb" style="background-image:url('assets/zoomverse-toy-city-speedway.png')"></div>
+        <div class="body"><div class="mode">RACE · PLANET 1</div><h2>Toy City Speedway</h2><p>2 laps, 20 stars, boost pads &amp; a ramp.</p><div class="best" id="best-race"></div></div>
+      </a>
+      <a class="card" id="card-galaxy" href="galaxy.html">
+        <span class="badge" id="badge-race2">PLAY</span>
+        <div class="thumb" style="background-image:url('assets/zoomverse-world-keyart.png')"></div>
+        <div class="body"><div class="mode">RACE · PLANET 2</div><h2>Galaxy Loop Road</h2><p>Fly through 5 star rings on a floating space loop.</p><div class="best" id="best-race2"></div></div>
+      </a>
+      <a class="card" id="card-ocean" href="ocean.html">
+        <span class="badge" id="badge-race3">PLAY</span>
+        <div class="thumb" style="background:linear-gradient(160deg,#0a4a63,#27C4F2 70%,#8fe3ff)"></div>
+        <div class="body"><div class="mode">RACE · PLANET 3</div><h2>Ocean Tunnel Dash</h2><p>Glass-tunnel race — 20 stars, dodge slow bubbles.</p><div class="best" id="best-race3"></div></div>
+      </a>
+      <a class="card" id="card-factory" href="factory.html">
+        <span class="badge" id="badge-race4">PLAY</span>
+        <div class="thumb" style="background:linear-gradient(160deg,#2a2f4a,#8893b8 70%,#27C4F2)"></div>
+        <div class="body"><div class="mode">RACE · PLANET 4</div><h2>Robot Factory Run</h2><p>Factory lanes — 20 stars, dodge moving stampers.</p><div class="best" id="best-race4"></div></div>
+      </a>
+      <a class="card" id="card-rainbow" href="rainbow.html">
+        <span class="badge" id="badge-race5">PLAY</span>
+        <div class="thumb" style="background:linear-gradient(160deg,#ff5d5d,#ffe24a 40%,#6dff8a 60%,#5dc8ff 80%,#b58aff)"></div>
+        <div class="body"><div class="mode">RACE · PLANET 5</div><h2>Rainbow Stunt Planet</h2><p>Five ramps, big air — chase stunt points.</p><div class="best" id="best-race5"></div></div>
+      </a>
+      <a class="card" id="card-castle" href="castle.html">
+        <span class="badge" id="badge-race6">PLAY</span>
+        <div class="thumb" style="background:linear-gradient(160deg,#0a0a30,#2a3a82 60%,#F2B43A)"></div>
+        <div class="body"><div class="mode">RACE · PLANET 6 · FINALE</div><h2>Star Castle Finale</h2><p>The grand finale — win the Dream Team car.</p><div class="best" id="best-race6"></div></div>
+      </a>
+      <a class="card" href="build.html">
+        <span class="badge" id="badge-build">PLAY</span>
+        <div class="thumb" style="background-image:url('assets/zoomverse-world-keyart.png')"></div>
+        <div class="body"><div class="mode">BUILD</div><h2>Broken Bridge</h2><p>Place tiles to span the gap, then drive across.</p></div>
+      </a>
+      <a class="card" href="command.html">
+        <span class="badge" id="badge-command">PLAY</span>
+        <div class="thumb" style="background-image:url('assets/zoomverse-robo-buddy.png');background-size:contain;background-color:#0e1640;background-repeat:no-repeat"></div>
+        <div class="body"><div class="mode">COMMAND</div><h2>Dad &amp; Son HQ</h2><p>Command bots to repair 3 stations.</p></div>
+      </a>
+      <a class="card" href="garage.html">
+        <span class="badge" style="border-color:#27C4F2;color:#27C4F2">UPGRADE</span>
+        <div class="thumb" style="background-image:url('assets/zoomverse-car-07.png')"></div>
+        <div class="body"><div class="mode">GARAGE</div><h2>Upgrade Bay</h2><p>Spend your stars on engine, wheels, boost &amp; more.</p></div>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    Prototype build · stars are saved in this browser ·
+    <button class="reset" id="resetBtn">Reset progress</button>
+  </footer>
+
+  <script type="module">
+    import { Save } from "./src/save.js";
+    const d = Save.load();
+    const done = d.completed || {};
+    document.getElementById("starTotal").textContent = d.stars || 0;
+    const badgeFor = { race: "badge-race", build: "badge-build", command: "badge-command", race2: "badge-race2", race3: "badge-race3", race4: "badge-race4", race5: "badge-race5", race6: "badge-race6" };
+    for (const key of Object.keys(badgeFor)) {
+      if (done[key]) { const b = document.getElementById(badgeFor[key]); b.textContent = "✓ DONE"; b.classList.add("done"); }
+    }
+    const bestData = d.best || {};
+    for (const key of ["race", "race2", "race3", "race4", "race5", "race6"]) {
+      const el = document.getElementById("best-" + key);
+      if (el && bestData[key] !== undefined) el.textContent = "⏱ Best " + bestData[key].toFixed(1) + "s";
+    }
+    function lock(cardId, badgeId, unlocked, msg) {
+      if (unlocked) return;
+      const b = document.getElementById(badgeId); b.textContent = "🔒 LOCKED";
+      const c = document.getElementById(cardId); c.style.opacity = "0.6";
+      c.addEventListener("click", (e) => { e.preventDefault(); alert(msg); });
+    }
+    lock("card-galaxy", "badge-race2", done.race || done.race2, "Clear Toy City Speedway first to unlock Galaxy Loop Road!");
+    lock("card-ocean", "badge-race3", done.race2 || done.race3, "Clear Galaxy Loop Road first to unlock Ocean Tunnel Dash!");
+    lock("card-factory", "badge-race4", done.race3 || done.race4, "Clear Ocean Tunnel Dash first to unlock Robot Factory Run!");
+    lock("card-rainbow", "badge-race5", done.race4 || done.race5, "Clear Robot Factory Run first to unlock Rainbow Stunt Planet!");
+    lock("card-castle", "badge-race6", done.race5 || done.race6, "Clear Rainbow Stunt Planet first to unlock the Star Castle Finale!");
+    document.getElementById("resetBtn").onclick = () => { Save.reset(); location.reload(); };
+  </script>
+</body>
+</html>

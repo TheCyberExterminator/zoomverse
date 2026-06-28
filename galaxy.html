@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>ZOOMVERSE — Galaxy Loop Road</title>
+<link rel="stylesheet" href="styles.css" />
+<script type="importmap">
+{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+</script>
+</head>
+<body>
+  <div id="menu" class="overlay">
+    <div class="panel">
+      <div class="kicker">★ PLANET 2 · RACE ★</div>
+      <h1>GALAXY<span>LOOP ROAD</span></h1>
+      <p>Floating space race — fly through 5 star rings, 2 laps.</p>
+      <button id="playBtn" class="bigbtn">▶ PLAY</button>
+      <div class="hint">Drive: <b>W A S D</b> / Arrows &nbsp;·&nbsp; Boost: <b>Space</b> &nbsp;·&nbsp; Reset: <b>R</b> &nbsp;·&nbsp; Pause: <b>Esc</b></div>
+    </div>
+  </div>
+
+  <a class="hublink hidden" id="hubLink" href="index.html">⌂ Hub</a>
+
+  <div id="result" class="overlay hidden">
+    <div class="panel">
+      <h2>Loop complete! 🏁</h2>
+      <p id="resultText">+0 stars</p>
+      <button id="resultReplay" class="bigbtn">Replay</button>
+      <a class="bigbtn ghost" href="index.html">Galaxy Hub</a>
+    </div>
+  </div>
+
+  <div id="pause" class="overlay hidden">
+    <div class="panel">
+      <h2>Paused</h2>
+      <button id="resumeBtn" class="bigbtn">Resume</button>
+      <button id="restartBtn" class="bigbtn ghost">Restart</button>
+      <a class="bigbtn ghost" href="index.html">Back to Hub</a>
+    </div>
+  </div>
+
+  <div id="hud" class="hidden">
+    <div class="hud-left">
+      <div class="stars">★ <span id="starCount">0</span> / <span id="starTotal">0</span></div>
+      <div class="lap">LAP <span id="lap">1</span>/2</div>
+      <div class="lap">⏱ <span id="time">0.0</span>s</div>
+      <div class="lap">🏁 P<span id="pos">1</span>/<span id="posTotal">3</span></div>
+      <div class="lap">✨ <span id="stunt">0</span></div>
+    </div>
+    <div id="countdown" class="countdown hidden">3</div>
+    <div class="hud-right">
+      <div class="speed"><span id="speed">0</span><small>km/h</small></div>
+      <div class="boostbar"><div id="boostfill"></div></div>
+    </div>
+    <div id="toast" class="toast"></div>
+  </div>
+
+  <div id="touch" class="hidden">
+    <div class="pad left">
+      <button data-k="left">◀</button>
+      <button data-k="right">▶</button>
+    </div>
+    <div class="pad right">
+      <button data-k="boost">★</button>
+      <button data-k="brake">▼</button>
+      <button data-k="accel">▲</button>
+    </div>
+  </div>
+
+  <script>window.ZV_TRACK = "galaxy";</script>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

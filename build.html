@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ZOOMVERSE — Build Mode: Broken Bridge</title>
+<link rel="stylesheet" href="styles.css" />
+<script type="importmap">
+{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+</script>
+<style>
+  /* build-mode toolbar (specific to this page) */
+  #toolbar{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:6;
+    display:flex;gap:8px;background:rgba(11,16,48,.8);padding:10px 12px;border-radius:18px;
+    box-shadow:0 0 0 2px rgba(39,196,242,.4),0 10px 30px rgba(0,0,0,.45)}
+  #toolbar button{font-family:inherit;font-weight:800;font-size:.9rem;color:#fff;cursor:pointer;
+    border:none;border-radius:12px;padding:.6rem .9rem;background:linear-gradient(180deg,#2E5BE0,#1b2f8f);
+    box-shadow:0 3px 0 #0e1a5c;transition:transform .07s}
+  #toolbar button:active{transform:translateY(2px)}
+  #toolbar button.active{outline:3px solid #27C4F2}
+  #toolbar button.gold{background:linear-gradient(180deg,#F2B43A,#d9920f);color:#221500;box-shadow:0 3px 0 #8a5e08}
+  #tip{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:6;
+    background:rgba(11,16,48,.8);border:2px solid rgba(39,196,242,.5);padding:.5rem 1rem;border-radius:12px;
+    font-weight:700;font-size:.92rem}
+</style>
+</head>
+<body>
+  <a class="hublink" href="index.html">⌂ Hub</a>
+
+  <div id="menu" class="overlay">
+    <div class="panel">
+      <div class="kicker">★ BUILD MODE ★</div>
+      <h1>BROKEN<span>BRIDGE</span></h1>
+      <p>Place road tiles to span the gap, then test-drive across.</p>
+      <button id="playBtn" class="bigbtn">▶ START BUILDING</button>
+      <div class="hint">Click a glowing cell to place · <b>X</b> or right-click to delete · then press <b>Test Drive</b></div>
+    </div>
+  </div>
+
+  <div id="win" class="overlay hidden">
+    <div class="panel">
+      <h2>Bridge complete! 🌟</h2>
+      <p>You crossed the gap. +15 stars · Bridge pieces unlocked.</p>
+      <button id="againBtn" class="bigbtn">Build again</button>
+      <a class="bigbtn ghost" href="index.html">Galaxy Hub</a>
+    </div>
+  </div>
+
+  <div id="tip" class="hidden">Build the missing road across the gap</div>
+
+  <div id="toolbar" class="hidden">
+    <button id="pieceRoad" class="active">🧱 Road</button>
+    <button id="pieceRamp">🛫 Ramp</button>
+    <button id="delBtn">🗑 Delete</button>
+    <button id="clearBtn">Clear</button>
+    <button id="driveBtn" class="gold">🚗 Test Drive</button>
+  </div>
+
+  <script type="module" src="src/buildMode.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "appId": "com.zoomverse.app",
+  "appName": "Noah & Dad Zoomverse",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": true
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "noah-dad-zoomverse",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Noah & Dad: ZOOMVERSE — Android wrapper (Capacitor)",
+  "scripts": {
+    "sync": "cap sync",
+    "open:android": "cap open android"
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.1.0",
+    "@capacitor/android": "^6.1.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.0"
+  }
+}
