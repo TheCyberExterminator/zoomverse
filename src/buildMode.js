@@ -184,7 +184,7 @@ el("driveBtn").onclick = () => {
   mode = "drive"; ghost.visible = false; vy = 0;
   car.reset(0, -9, 0);                                   // start on near stub, facing +Z
   car.group.visible = true;
-  chase.snap(car.group.position);
+  chase.snap(car.group.position, car.heading);
   el("tip").textContent = "Drive across! W/S = go, A/D = steer";
   el("driveBtn").textContent = "◀ Back to building";
 };

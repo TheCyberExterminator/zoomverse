@@ -86,8 +86,8 @@ el("starTotal").textContent = world.stars.length;
 function startGame() {
   car.reset(0, world.R, Math.PI / 2); // facing along the track (+X direction)
   car.applyUpgrades((Save.load().upgrades) || {}); // garage upgrades affect the car
-  chase.offset.z = -(8 + Save.getSettings().camDist * 7); // camera distance setting
-  chase.snap(car.group.position);
+  chase.offset.z = -(8 + Save.getSettings().camDist * 7); // camera distance setting (negative = behind)
+  chase.snap(car.group.position, car.heading);
   starCount = 0; lap = 1; lapArmed = false;
   countdown = 3; raceTime = 0; goHide = 0;
   rivals.forEach((r) => { r.angle = Math.PI / 2 - r.stagger; r.prog = 0; });
