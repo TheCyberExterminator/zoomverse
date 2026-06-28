@@ -19,6 +19,7 @@ export class World {
     this.boostPads = [];  // {mesh, pos}
     this.ramps = [];      // {pos}
     this.R = 34;          // road centre radius
+    this.lane = 5.5;      // road half-width (guard-rail limit)
     this._lights();
     this._sky();
     this._ground();
@@ -74,6 +75,13 @@ export class World {
     );
     road.rotation.x = -Math.PI / 2; road.position.y = 0.02; road.receiveShadow = true;
     this.scene.add(road);
+
+    // glowing guard rails along both road edges
+    [this.R - this.lane, this.R + this.lane].forEach((rad) => {
+      const rail = new THREE.Mesh(new THREE.TorusGeometry(rad, 0.3, 8, 140),
+        new THREE.MeshStandardMaterial({ color: 0x27C4F2, emissive: 0x0c6f9e, emissiveIntensity: 0.7 }));
+      rail.rotation.x = -Math.PI / 2; rail.position.y = 0.45; this.scene.add(rail);
+    });
 
     // start/finish line
     const line = new THREE.Mesh(

@@ -16,6 +16,7 @@ export class CastleWorld {
     this.boostPads = [];
     this.ramps = [];
     this.R = 38;
+    this.lane = 4.5;      // road half-width (guard-rail limit)
     this._lights();
     this._sky();
     this._road();
@@ -56,6 +57,14 @@ export class CastleWorld {
     const road = new THREE.Mesh(new THREE.RingGeometry(this.R - 5, this.R + 5, 120),
       new THREE.MeshStandardMaterial({ color: 0xcfd6ea, roughness: 0.8, map: tiled("tex-road.png", 10) }));
     road.rotation.x = -Math.PI / 2; road.receiveShadow = true; this.scene.add(road);
+
+    // glowing gold guard rails along both road edges
+    [this.R - this.lane, this.R + this.lane].forEach((rad) => {
+      const rail = new THREE.Mesh(new THREE.TorusGeometry(rad, 0.3, 8, 150),
+        new THREE.MeshStandardMaterial({ color: 0xF2B43A, emissive: 0x6a4d00, emissiveIntensity: 0.7 }));
+      rail.rotation.x = -Math.PI / 2; rail.position.y = 0.45; this.scene.add(rail);
+    });
+
     const line = new THREE.Mesh(new THREE.PlaneGeometry(10, 1.4), new THREE.MeshStandardMaterial({ color: 0xF2B43A, emissive: 0x5a3f00, emissiveIntensity: 0.5 }));
     line.rotation.x = -Math.PI / 2; line.position.set(0, 0.04, this.R); this.scene.add(line);
   }

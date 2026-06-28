@@ -75,7 +75,7 @@ function updateRivals(dt) {
 // ---------- game state ----------
 let running = false, started = false, finished = false;
 let starCount = 0, lap = 1, lapArmed = false;
-let countdown = 0, raceTime = 0, goHide = 0;
+let countdown = 0, raceTime = 0, goHide = 0, railCd = 0;
 let stuntTotal = 0, airTime = 0, spinAccum = 0, prevAir = false, prevHeading = 0;
 const START = { x: 0, z: world.R };
 const HOLD = { accel: 0, steer: 0, brake: false, boost: false, reset: false };
@@ -199,6 +199,24 @@ function checkHazards() {
   }
 }
 
+// guard rails — keep the car within the ring road's width (with a soft bump)
+function applyGuardRails(dt) {
+  railCd -= dt;
+  const lane = world.lane || 5;
+  const p = car.group.position;
+  const r = Math.sqrt(p.x * p.x + p.z * p.z);
+  if (r < 0.001) return;
+  const inner = world.R - lane, outer = world.R + lane;
+  if (r < inner || r > outer) {
+    const cr = r < inner ? inner : outer;
+    p.x = (p.x / r) * cr; p.z = (p.z / r) * cr;     // push back onto the road
+    if (car.speed > 10) {
+      car.speed *= 0.55;                             // bump = lose some speed
+      if (railCd <= 0) { Audio.repair(); particles.burst(p, 0x27C4F2, 5, { life: 0.4, spread: 1.2, up: 1 }); railCd = 0.2; }
+    }
+  }
+}
+
 function checkLap() {
   const p = car.group.position;
   // arm when the car reaches the far side of the oval
@@ -233,6 +251,7 @@ function animate() {
       if (input.state.reset) car.reset(START.x, START.z, Math.PI / 2);
       const boosting = car.update(dt, input.state);
       if (boosting) particles.spawn({ x: car.group.position.x, y: car.group.position.y + 0.3, z: car.group.position.z }, 0x27C4F2, { life: 0.5, spread: 1.2, up: 0.4, size: 0.9 });
+      applyGuardRails(dt);
       checkPickups();
       checkRamps();
       checkHazards();

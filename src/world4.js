@@ -18,6 +18,7 @@ export class FactoryWorld {
     this.hazards = [];      // {pos} moving stampers
     this._haz = [];         // internal {mesh, baseAngle, phase, amp}
     this.R = 35;
+    this.lane = 4.5;        // road half-width (guard-rail limit)
     this._t = 0;
     this._lights();
     this._sky();
@@ -55,6 +56,13 @@ export class FactoryWorld {
     const road = new THREE.Mesh(new THREE.RingGeometry(this.R - 5, this.R + 5, 96),
       new THREE.MeshStandardMaterial({ color: 0xc7cede, roughness: 0.9, map: tiled("tex-road.png", 8) }));
     road.rotation.x = -Math.PI / 2; road.position.y = 0.02; road.receiveShadow = true; this.scene.add(road);
+
+    // glowing guard rails along both road edges
+    [this.R - this.lane, this.R + this.lane].forEach((rad) => {
+      const rail = new THREE.Mesh(new THREE.TorusGeometry(rad, 0.3, 8, 140),
+        new THREE.MeshStandardMaterial({ color: 0xffa53a, emissive: 0x6a3a00, emissiveIntensity: 0.7 }));
+      rail.rotation.x = -Math.PI / 2; rail.position.y = 0.45; this.scene.add(rail);
+    });
 
     const line = new THREE.Mesh(new THREE.PlaneGeometry(10, 1.4), new THREE.MeshStandardMaterial({ color: 0xffffff }));
     line.rotation.x = -Math.PI / 2; line.position.set(0, 0.03, this.R); this.scene.add(line);

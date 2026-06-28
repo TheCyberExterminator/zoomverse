@@ -17,6 +17,7 @@ export class GalaxyWorld {
     this.boostPads = [];
     this.ramps = [];
     this.R = 36;
+    this.lane = 5;        // road half-width (guard-rail limit)
     this._lights();
     this._sky();
     this._road();

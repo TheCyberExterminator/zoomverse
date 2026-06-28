@@ -19,6 +19,7 @@ export class OceanWorld {
     this.hazards = [];      // {pos} slow bubbles
     this.bubbleMeshes = [];
     this.R = 35;
+    this.lane = 3.8;      // road half-width (guard-rail limit)
     this._lights();
     this._sky();
     this._tunnel();
@@ -59,6 +60,13 @@ export class OceanWorld {
     );
     road.rotation.x = -Math.PI / 2; road.position.y = 0; road.receiveShadow = true;
     this.scene.add(road);
+
+    // glowing guard rails along both road edges
+    [this.R - this.lane, this.R + this.lane].forEach((rad) => {
+      const rail = new THREE.Mesh(new THREE.TorusGeometry(rad, 0.28, 8, 140),
+        new THREE.MeshStandardMaterial({ color: 0x4affd0, emissive: 0x0c7a64, emissiveIntensity: 0.7 }));
+      rail.rotation.x = -Math.PI / 2; rail.position.y = 0.4; this.scene.add(rail);
+    });
 
     // outer sea floor
     const floor = new THREE.Mesh(new THREE.CircleGeometry(120, 64),
